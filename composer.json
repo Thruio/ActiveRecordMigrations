@@ -1,0 +1,23 @@
+{
+  "name"       : "thru.io/active_record_migrations",
+  "description": "Migrations for Active Record",
+  "authors"    : [
+    {
+      "name" : "Matthew Baggett",
+      "email": "matthew@baggett.me"
+    }
+  ],
+  "require"    : {
+    "thru.io/active_record": ">=2.0.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "codeclimate/php-test-reporter": "dev-master",
+    "fzaninotto/faker": "1.5.*@dev"
+  },
+  "autoload"   : {
+    "psr-0": {
+      "Thru\\ActiveRecordMigrations\\": ""
+    }
+  }
+}
