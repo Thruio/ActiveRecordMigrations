@@ -8,7 +8,7 @@
     }
   ],
   "require"    : {
-    "thru.io/active_record": ">=2.0.*"
+    "thru.io/active_record": "2.0.*"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
