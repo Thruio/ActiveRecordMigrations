@@ -1,0 +1,18 @@
+language: php
+
+php: 5.3
+
+before_script :
+  - composer install
+  - mysql -e 'create database active_record_test;'
+  - mysql -e "use mysql; SET PASSWORD FOR 'travis'@'localhost' = PASSWORD('travis'); FLUSH PRIVILEGES;"
+
+after_script:
+  - CODECLIMATE_REPO_TOKEN="e14841f1224623da44df1fa624c3680770a9dd3f75a1ff4614b5cf432ecd315c" vendor/bin/test-reporter --stdout > codeclimate.json
+  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
+
+script: phpunit
+
+notifications:
+  email:
+    - matthew@baggett.me
