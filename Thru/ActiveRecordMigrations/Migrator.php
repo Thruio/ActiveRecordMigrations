@@ -3,6 +3,7 @@
 namespace Thru\ActiveRecordMigrations;
 
 use Commando\Command;
+use Symfony\Component\Yaml\Yaml;
 
 class Migrator
 {
@@ -11,25 +12,28 @@ class Migrator
 		$migrator_command = new Command();
 		$migrator_command->option('i')
 			->aka('import')
-			->describedAs("Import migrations from .")
+			->describedAs("Import fixtures from .")
 			->boolean();
 		$migrator_command->option('e')
 			->aka('export')
-			->describedAs("Export migrations from .")
+			->describedAs("Export fixtures from .")
 			->boolean();
 		$migrator_command->option('class')
-			->require();
+			->describedAs("fill this in");
 		$migrator_command->option('migration_path')->aka('output')
 			->require()
-			->default("migrations");
+			->default("fixtures");
 
 		if($migrator_command['export']){
 			$classes_to_compute = [];
 
 			if($migrator_command['class']){
-				$classes_to_compute = $migrator_command['class'];
+				$classes_to_compute[] = $migrator_command['class'];
 			}else{
-				yaml
+				$array = Yaml::parse(file_get_contents(ACTIVERECORDMIGRATIONS_CWD . "/fixtures.yaml"));
+				foreach($array['models'] as $model){
+					$classes_to_compute[] = $model;
+				}
 			}
 			foreach($classes_to_compute as $class){
 				Exporter::Run($class, $migrator_command['migration_path']);
