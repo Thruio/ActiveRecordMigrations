@@ -19,5 +19,8 @@
     "psr-0": {
       "Thru\\ActiveRecordMigrations\\": ""
     }
-  }
+  },
+  "bin": [
+    "ar_migrate"
+  ]
 }
