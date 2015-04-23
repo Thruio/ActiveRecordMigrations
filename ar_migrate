@@ -26,6 +26,11 @@ if (!defined('ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL')) {
 	die(1);
 }
 
+define("ACTIVERECORDMIGRATIONS_CWD", getcwd());
+
 require ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL;
+
+$bootstrap = dirname(ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL) . "/../bootstrap.php";
+require $bootstrap;
 
 \Thru\ActiveRecordMigrations\Migrator::Main();
