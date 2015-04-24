@@ -22,6 +22,10 @@ class Importer{
 				mkdir($output_dir, 0777, true);
 			}
 			$input_file = $object->get_class(true) . ".yaml";
+			if(!file_exists($output_dir . "/" . $input_file)){
+				echo "Skipping {$input_file}. Does not exist.\n";
+				return false;
+			}
 			$yaml = file_get_contents($output_dir . "/" . $input_file);
 
 			$object_count = 0;
