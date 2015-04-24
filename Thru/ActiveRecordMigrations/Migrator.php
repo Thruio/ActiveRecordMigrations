@@ -24,21 +24,25 @@ class Migrator
 			->require()
 			->default("fixtures");
 
-		if($migrator_command['export']){
-			$classes_to_compute = [];
+		$classes_to_compute = [];
 
-			if($migrator_command['class']){
-				$classes_to_compute[] = $migrator_command['class'];
-			}else{
-				$array = Yaml::parse(file_get_contents(ACTIVERECORDMIGRATIONS_CWD . "/fixtures.yaml"));
-				foreach($array['models'] as $model){
-					$classes_to_compute[] = $model;
-				}
+		if($migrator_command['class']){
+			$classes_to_compute[] = $migrator_command['class'];
+		}else{
+			$array = Yaml::parse(file_get_contents(ACTIVERECORDMIGRATIONS_CWD . "/fixtures.yaml"));
+			foreach($array['models'] as $model){
+				$classes_to_compute[] = $model;
 			}
-			foreach($classes_to_compute as $class){
+		}
+
+		if($migrator_command['export']) {
+			foreach ($classes_to_compute as $class) {
 				Exporter::Run($class, $migrator_command['migration_path']);
 			}
-
+		}elseif($migrator_command['import']) {
+			foreach ($classes_to_compute as $class) {
+				Importer::Run($class, $migrator_command['migration_path']);
+			}
 		}else{
 			$migrator_command->printHelp();
 		}
