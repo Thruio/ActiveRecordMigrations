@@ -18,6 +18,7 @@ class Exporter{
 				$schema = array_keys($row->get_class_schema());
 				$data_array[] = $row->__ToArray($schema);
 			}
+			//var_dump($data);exit;
 			if(!file_exists($output_dir)){
 				mkdir($output_dir, 0777, true);
 			}
