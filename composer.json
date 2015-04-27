@@ -18,8 +18,13 @@
     "fzaninotto/faker": "1.5.*@dev"
   },
   "autoload"   : {
-    "psr-0": {
-      "Thru\\ActiveRecordMigrations\\": ""
+    "psr-4": {
+      "Thru\\ActiveRecordMigrations\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Thru\\ActiveRecordMigrations\\Test\\": "tests/"
     }
   },
   "bin": [
