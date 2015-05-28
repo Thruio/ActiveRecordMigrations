@@ -24,8 +24,9 @@ class Exporter{
 			}
 			$output_file = $object->get_class(true) . ".yaml";
 			$yaml = Yaml::dump($data_array);
-			file_put_contents($output_dir . "/" . $output_file, $yaml);
-			echo "Written " . strlen($yaml) . " bytes to {$output_file}\n";
+			$output_file_path = $output_dir . "/" . $output_file;
+			file_put_contents($output_file_path, $yaml);
+			echo "Written " . strlen($yaml) . " bytes to {$output_file_path}\n";
 
 		}else{
 			die("Not an ActiveRecord object\n\n");
