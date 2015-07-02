@@ -33,7 +33,7 @@ class Importer{
 			foreach(Yaml::parse($yaml) as $import_object){
 				/* @var $o ActiveRecord */
 				$o = new $class();
-				$primary = $o->get_primary_key_index();
+				$primary = $o->get_primary_key_index()[0];
 				$no_primary = false;
 				if(isset($import_object[$primary])){
 					$o = $class::search()->where($primary, $import_object[$primary])->execOne();
