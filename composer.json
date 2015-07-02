@@ -8,7 +8,7 @@
     }
   ],
   "require"    : {
-    "thru.io/active_record": "0.2.*",
+    "thru.io/active_record": ">=0.2",
     "nategood/commando": "*",
     "symfony/yaml": "2.6.6"
   },
