@@ -15,13 +15,13 @@ class Importer{
 
 			foreach($data as $row){
 				/* @var $row ActiveRecord */
-				$schema = array_keys($row->get_class_schema());
+				$schema = array_keys($row->getClassSchema());
 				$data_array[] = $row->__ToArray($schema);
 			}
 			if(!file_exists($output_dir)){
 				mkdir($output_dir, 0777, true);
 			}
-			$input_file = $object->get_class(true) . ".yaml";
+			$input_file = $object->getClass(true) . ".yaml";
 			if(!file_exists($output_dir . "/" . $input_file)){
 				echo "Skipping {$input_file}. Does not exist.\n";
 				return false;
@@ -33,7 +33,7 @@ class Importer{
 			foreach(Yaml::parse($yaml) as $import_object){
 				/* @var $o ActiveRecord */
 				$o = new $class();
-				$primary = $o->get_primary_key_index()[0];
+				$primary = $o->getPrimaryKeyIndex()[0];
 				$no_primary = false;
 				if(isset($import_object[$primary])){
 					$o = $class::search()->where($primary, $import_object[$primary])->execOne();

@@ -15,14 +15,14 @@ class Exporter{
 
 			foreach($data as $row){
 				/* @var $row ActiveRecord */
-				$schema = array_keys($row->get_class_schema());
+				$schema = array_keys($row->getClassSchema());
 				$data_array[] = $row->__ToArray($schema);
 			}
 			//var_dump($data);exit;
 			if(!file_exists($output_dir)){
 				mkdir($output_dir, 0777, true);
 			}
-			$output_file = $object->get_class(true) . ".yaml";
+			$output_file = $object->getClass(true) . ".yaml";
 			$yaml = Yaml::dump($data_array);
 			$output_file_path = $output_dir . "/" . $output_file;
 			file_put_contents($output_file_path, $yaml);
