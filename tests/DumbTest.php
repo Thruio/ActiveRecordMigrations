@@ -2,9 +2,11 @@
 namespace Thru\ActiveRecord\Test;
 
 
-class DumbTest extends BaseTest {
+class DumbTest extends BaseTest
+{
 
-  public function testNothing(){
-    $this->assertTrue(true);
-  }
+    public function testNothing()
+    {
+        $this->assertTrue(true);
+    }
 }
