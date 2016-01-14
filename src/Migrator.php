@@ -8,7 +8,7 @@ use Thru\ActiveRecord\ActiveRecord;
 
 class Migrator
 {
-    static public function Main()
+    public static function main()
     {
         $start = microtime(true);
 
@@ -34,42 +34,42 @@ class Migrator
 
         $classes_to_compute = [];
 
-        if($migrator_command['class']) {
+        if ($migrator_command['class']) {
             $classes_to_compute[] = $migrator_command['class'];
-        }else{
+        } else {
             $array = Yaml::parse(file_get_contents(ACTIVERECORDMIGRATIONS_CWD . "/fixtures.yaml"));
-            foreach($array['models'] as $model){
+            foreach ($array['models'] as $model) {
                 $classes_to_compute[] = $model;
             }
         }
 
-        if($migrator_command['purge']) {
-            foreach ($classes_to_compute as $class){
-                Migrator::Purge($class);
+        if ($migrator_command['purge']) {
+            foreach ($classes_to_compute as $class) {
+                Migrator::purge($class);
             }
         }
 
-        if($migrator_command['export']) {
+        if ($migrator_command['export']) {
             foreach ($classes_to_compute as $class) {
-                Exporter::Run($class, $migrator_command['migration_path']);
+                Exporter::run($class, $migrator_command['migration_path']);
             }
             $end = microtime(true);
             $time_to_execute = number_format($end - $start, 2);
             echo "Export finished in {$time_to_execute} seconds\n\n";
-        }elseif($migrator_command['import']) {
+        } elseif ($migrator_command['import']) {
             foreach ($classes_to_compute as $class) {
-                Importer::Run($class, $migrator_command['migration_path']);
+                Importer::run($class, $migrator_command['migration_path']);
             }
             $end = microtime(true);
             $time_to_execute = number_format($end - $start, 2);
             echo "Import finished in {$time_to_execute} seconds\n\n";
-        }else{
+        } else {
             $migrator_command->printHelp();
         }
 
     }
 
-    static public function Purge($class)
+    public static function purge($class)
     {
         /* @var $o ActiveRecord */
         $o = new $class();
