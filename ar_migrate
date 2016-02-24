@@ -1,8 +1,5 @@
 #!/usr/bin/env php
 <?php
-/*
- * This file is based on part of PHPUnit.
- */
 
 if (!ini_get('date.timezone')) {
     ini_set('date.timezone', 'UTC');
@@ -13,6 +10,9 @@ foreach (array(__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.p
         define('ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL', $file);
         break;
     }
+}
+if(!defined("ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL")){
+    die("Cannot find vendor/autoload.php!\n");
 }
 
 unset($file);
@@ -32,6 +32,9 @@ define("ACTIVERECORDMIGRATIONS_CWD", getcwd());
 require ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL;
 
 $bootstrap = dirname(ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL) . "/../bootstrap.php";
+if(!file_exists($bootstrap)){
+    die("Cannot find {$bootstrap}!\n");
+}
 require $bootstrap;
 
 \Thru\ActiveRecordMigrations\Migrator::main();
