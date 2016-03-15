@@ -11,7 +11,7 @@ foreach (array(__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.p
         break;
     }
 }
-if(!defined("ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL")){
+if (!defined("ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL")) {
     die("Cannot find vendor/autoload.php!\n");
 }
 
@@ -32,7 +32,7 @@ define("ACTIVERECORDMIGRATIONS_CWD", getcwd());
 require ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL;
 
 $bootstrap = dirname(ACTIVERECORDMIGRATIONS_COMPOSER_INSTALL) . "/../bootstrap.php";
-if(!file_exists($bootstrap)){
+if (!file_exists($bootstrap)) {
     die("Cannot find {$bootstrap}!\n");
 }
 require $bootstrap;

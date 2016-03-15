@@ -10,7 +10,7 @@ class Migrator
 {
     public static function main()
     {
-        if(!file_exists(ACTIVERECORDMIGRATIONS_CWD . "/fixtures.yaml")){
+        if (!file_exists(ACTIVERECORDMIGRATIONS_CWD . "/fixtures.yaml")) {
             die("No fixtures.yaml found, not sure what I should import or export!\n");
         }
         $start = microtime(true);
